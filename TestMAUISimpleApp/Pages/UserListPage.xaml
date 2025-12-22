@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentPage x:Class="TestMAUISimpleApp.Pages.UserListPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TestMAUISimpleApp.ViewModels"
+             x:DataType="local:UserListPageViewModel">
+
+    <Grid Padding="16" RowDefinitions="Auto,Auto,Auto,*" RowSpacing="10">
+
+        <Entry
+        Grid.Row="0"
+        Placeholder="Name"
+        Text="{Binding Name}" />
+
+        <Entry
+        Grid.Row="1"
+        Placeholder="Age"
+        Keyboard="Numeric"
+        Text="{Binding Age}" />
+
+        <Button
+        Grid.Row="2"
+        Text="Add"
+        Command="{Binding AddUserCommand}" />
+
+        <CollectionView
+        Grid.Row="3"
+        ItemsSource="{Binding Users}"
+        SelectionMode="Single"
+        SelectionChanged="OnSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10" ColumnDefinitions="*,Auto">
+                        <Label Text="{Binding Name}" />
+                        <Label Text="{Binding Age}" Grid.Column="1" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+
+</ContentPage>
