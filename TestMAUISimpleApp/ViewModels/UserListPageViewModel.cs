@@ -55,5 +55,6 @@ public partial class UserListPageViewModel : ObservableObject, IRecipient<UserUp
     public void Receive(UserUpdatedEventMessage message)
     {
         SaveUsers();
+        LoadUsers();
     }
 }
