@@ -1,4 +1,5 @@
 ﻿using TestMAUISimpleApp.Pages;
+using TestMAUISimpleApp.ViewModels;
 
 namespace TestMAUISimpleApp
 {
@@ -7,8 +8,12 @@ namespace TestMAUISimpleApp
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(UserListPage), typeof(UserListPage));
+
             Routing.RegisterRoute(nameof(EditUserPage), typeof(EditUserPage));
+            Routing.RegisterRoute(nameof(SomePage), typeof(SomePage));
+            Routing.RegisterRoute(nameof(CreateUserPage), typeof(CreateUserPage));
+
+            BindingContext = new BurgerMenuViewModel();
         }
     }
 }

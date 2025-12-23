@@ -6,40 +6,26 @@ using TestMAUISimpleApp.Models;
 
 namespace TestMAUISimpleApp.ViewModels
 {
-    [QueryProperty(nameof(User), "User")]
-    public partial class EditUserPageViewModel : ObservableObject
+    public partial class CreateUserPageViewModel : ObservableObject
     {
-        private User _user = null!;
-
         [ObservableProperty]
         private string _name = string.Empty;
 
         [ObservableProperty]
         private string _age = string.Empty;
 
-        public User User
-        {
-            get => _user;
-            set
-            {
-                _user = value;
-                Name = value.Name;
-                Age = value.Age.ToString();
-            }
-        }
-
         [RelayCommand]
-        private async Task Save()
+        public async Task Save()
         {
             if (!int.TryParse(Age, out var age))
                 return;
 
-            var result = _user.Update(Name, age);
-            if (result.IsFailure)
+            var createUserResult = User.Create(Name, age);
+            if (createUserResult.IsFailure)
                 return;
 
             WeakReferenceMessenger.Default.Send(
-                new UserUpdatedEventMessage(_user)
+                new UserCreatedEventMessage(createUserResult.Value!)
             );
 
             await Shell.Current.GoToAsync("..");

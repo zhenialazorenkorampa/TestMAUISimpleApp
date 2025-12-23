@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using TestMAUISimpleApp.Pages;
 
 namespace TestMAUISimpleApp.ViewModels
 {
@@ -7,9 +6,7 @@ namespace TestMAUISimpleApp.ViewModels
     {
 
         [RelayCommand]
-        public async Task GoToUserList()
-        {
-            await Shell.Current.GoToAsync(nameof(UserListPage));
-        }
+        public static async Task GoToUserList() 
+            => Application.Current!.MainPage = new AppShell();
     }
 }

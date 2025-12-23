@@ -1,14 +1,30 @@
-<?xml version="1.0" encoding="UTF-8" ?>
 <Shell
     x:Class="TestMAUISimpleApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TestMAUISimpleApp.Pages"
-    Title="TestMAUISimpleApp">
+    xmlns:vm="clr-namespace:TestMAUISimpleApp.ViewModels"
+    x:DataType="vm:BurgerMenuViewModel"
+    FlyoutBehavior="Flyout">
 
+    <Shell.TitleView>
+        <HorizontalStackLayout HorizontalOptions="Center" Padding="10">
+            <Label Text="Header" VerticalOptions="Center" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+    
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        Title="Users"
+        ContentTemplate="{DataTemplate local:UserListPage}"
+        Route="UserListPage"
+        FlyoutItemIsVisible="False"/>
+
+    <Shell.FlyoutContent>
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label Text="Menu" FontSize="20" FontAttributes="Bold" Margin="0,20"/>
+            <Button Text="Create" Command="{Binding UserClickSaveCommand}" />
+            <Button Text="Some" Command="{Binding UserClickSomeCommand}" />
+        </VerticalStackLayout>
+    </Shell.FlyoutContent>
 
 </Shell>

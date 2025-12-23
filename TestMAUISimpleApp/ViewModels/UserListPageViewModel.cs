@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using TestMAUISimpleApp.EventMessages;
@@ -8,34 +7,16 @@ using TestMAUISimpleApp.Services;
 
 namespace TestMAUISimpleApp.ViewModels;
 
-public partial class UserListPageViewModel : ObservableObject, IRecipient<UserUpdatedEventMessage>
+public partial class UserListPageViewModel : ObservableObject, 
+    IRecipient<UserUpdatedEventMessage>, 
+    IRecipient<UserCreatedEventMessage>
 {
-    public ObservableCollection<User> Users { get; } = [];
-
-    [ObservableProperty]
-    private string name = string.Empty;
-
-    [ObservableProperty]
-    private string age = string.Empty;
+    public ObservableCollection<User> Users { get; } = new ObservableCollection<User>();
 
     public UserListPageViewModel()
     {
-        WeakReferenceMessenger.Default.Register(this);
+        WeakReferenceMessenger.Default.RegisterAll(this);
         LoadUsers();
-    }
-
-    [RelayCommand]
-    public void AddUser()
-    {
-        if (!int.TryParse(Age, out var age))
-            return;
-
-        var createUserResult = User.Create(Name, age);
-        if (createUserResult.IsFailure)
-            return;
-
-        Users.Add(createUserResult.Value!);
-        SaveUsers();
     }
 
     private void LoadUsers()
@@ -54,6 +35,13 @@ public partial class UserListPageViewModel : ObservableObject, IRecipient<UserUp
 
     public void Receive(UserUpdatedEventMessage message)
     {
+        SaveUsers();
+        LoadUsers();
+    }
+
+    public void Receive(UserCreatedEventMessage message)
+    {
+        Users.Add(message.Value);
         SaveUsers();
         LoadUsers();
     }
