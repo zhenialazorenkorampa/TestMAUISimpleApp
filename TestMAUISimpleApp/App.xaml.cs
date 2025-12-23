@@ -1,6 +1,4 @@
-﻿using TestMAUISimpleApp.Pages;
-
-namespace TestMAUISimpleApp
+﻿namespace TestMAUISimpleApp
 {
     public partial class App : Application
     {
@@ -11,7 +9,7 @@ namespace TestMAUISimpleApp
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new MainPage());
+            return new Window(new AppShell());
         }
     }
 }

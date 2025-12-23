@@ -4,7 +4,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:TestMAUISimpleApp.ViewModels"
              x:DataType="local:MainPageViewModel">
-
+    
+    <Shell.TitleView>
+        <HorizontalStackLayout HorizontalOptions="Center" Padding="10">
+            <Label Text="1111" VerticalOptions="Center" FontAttributes="Bold" />
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+    
     <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <Button Text="Users list" Command="{Binding GoToUserListCommand}"/>
     </HorizontalStackLayout>
