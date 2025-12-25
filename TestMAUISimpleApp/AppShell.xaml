@@ -5,9 +5,23 @@
     xmlns:local="clr-namespace:TestMAUISimpleApp.Pages"
     FlyoutBehavior="Disabled">
 
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Grid BackgroundColor="SkyBlue" HeightRequest="100">
+                <Label Text="{Binding Source={RelativeSource AncestorType={x:Type Shell}}, Path=FlyoutHeader}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       FontSize="20"
+                       TextColor="Black" />
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+
     <Shell.TitleView>
         <HorizontalStackLayout HorizontalOptions="Center" Padding="10">
-            <Label Text="Header" VerticalOptions="Center" FontAttributes="Bold" />
+            <Label Text="{Binding Source={RelativeSource AncestorType={x:Type Shell}}, Path=Title}" 
+                   VerticalOptions="Center" 
+                   FontAttributes="Bold" />
         </HorizontalStackLayout>
     </Shell.TitleView>
 
